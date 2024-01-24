@@ -1,0 +1,7 @@
+library(dplyr)
+setwd("/lustre/projects/Research_Project-MRC190311/WGBS/frith/wgbstools_DMR_calling/")
+neu_markers <- read.delim("find_markers_out/Markers.Neuron.bed")
+olig_markers <- read.delim("find_markers_out/Markers.Oligodendrocyte.bed")
+markers_concat <- rbind(neu_markers, olig_markers)
+markers_concat <- dplyr::rename(markers_concat, "#chr" = X.chr)
+write.table(markers_concat, "find_markers_out/concat_markers_out.tsv", sep = '\t', col.names = T, row.names = F, quote = F)
